@@ -1,118 +1,148 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity Web Player | G Game</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
-  </head>
-  <body>
-    <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
-      <div id="unity-loading-bar">
-        <div id="unity-logo"></div>
-        <div id="unity-progress-bar-empty">
-          <div id="unity-progress-bar-full"></div>
-        </div>
-      </div>
-      <div id="unity-warning"> </div>
-      <div id="unity-footer">
-        <div id="unity-logo-title-footer"></div>
-        <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">G Game</div>
-      </div>
-    </div>
-    <script>
-      var canvas = document.querySelector("#unity-canvas");
+<html>
 
-      // Shows a temporary message banner/ribbon for a few seconds, or
-      // a permanent error message on top of the canvas if type=='error'.
-      // If type=='warning', a yellow highlight color is used.
-      // Modify or remove this function to customize the visually presented
-      // way that non-critical warnings and error messages are presented to the
-      // user.
-      function unityShowBanner(msg, type) {
-        var warningBanner = document.querySelector("#unity-warning");
-        function updateBannerVisibility() {
-          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
-        }
-        var div = document.createElement('div');
-        div.innerHTML = msg;
-        warningBanner.appendChild(div);
-        if (type == 'error') div.style = 'background: red; padding: 10px;';
-        else {
-          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
-          setTimeout(function() {
-            warningBanner.removeChild(div);
-            updateBannerVisibility();
-          }, 5000);
-        }
-        updateBannerVisibility();
-      }
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Simple Portfolio Website Template</title>
+	<link rel="stylesheet" href="styles/core.css">
+	<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
 
-      var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/GGameBuild.loader.js";
-      var config = {
-        arguments: [],
-        dataUrl: buildUrl + "/GGameBuild.data",
-        frameworkUrl: buildUrl + "/GGameBuild.framework.js",
-        codeUrl: buildUrl + "/GGameBuild.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "G Game",
-        productVersion: "0.1.0",
-        showBanner: unityShowBanner,
-      };
+<body class="page sans">
+	<header>
+		<h1 class="page-title">
+			<span class="page-header-icon undefined">
+				<img class="icon" src="images/recognizerIcon.png" />
+			</span>
+			Unistroke Gesture Recognition
+		</h1>
+	</header>
+	<div class="page-body">
+		<div class="column-list">
+			<div style="width:50%" class="column">
+				<h1>Unistroke-Gestures</h1>
+				<p>
+					Unistroke-gestures are a way to input by drawing various lines. It can be simple straight lines,
+					curved or closed into shapes. This package contains tools for working with these gestures.
+				</p>
 
-      // By default, Unity keeps WebGL canvas render target size matched with
-      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
-      // Set this to false if you want to decouple this synchronization from
-      // happening inside the engine, and you would instead like to size up
-      // the canvas DOM size and WebGL render target sizes yourself.
-      // config.matchWebGLToCanvasSize = false;
+				<div class="page-gap"></div>
 
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
+				<p><strong>Description</strong></p>
+				<p>
+					This package will allow you to implement unusual and interesting gameplay elements
+					through the use of unistroke gestures recognition.
+				</p>
+			</div>
+			<div style="width:50%" class="column">
+				<div class="image">
+					<a href="images/cover.png">
+						<img style="width:336px" src="images/cover.png" />
+					</a>
+				</div>
+			</div>
+		</div>
 
-        var meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-        document.getElementsByTagName('head')[0].appendChild(meta);
-        document.querySelector("#unity-container").className = "unity-mobile";
-        canvas.className = "unity-mobile";
+		<div class="page-gap"></div>
 
-        // To lower canvas resolution on mobile devices to gain some
-        // performance, uncomment the following line:
-        // config.devicePixelRatio = 1;
+		<div class="flex">
+			<div style="font-size:1.5em"><span class="icon">🔎</span></div>
+			<p><strong>Preview</strong></p>
+		</div>
+		<div id="player"></div>
 
+		<div class="page-gap"></div>
 
-      } else {
-        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-        canvas.style.width = "960px";
-        canvas.style.height = "600px";
-      }
+		<div class="flex">
+			<div style="font-size:1.5em"><span class="icon">🛠</span></div>
+			<p><strong>Features</strong></p>
+		</div>
+		<p>This package contains tools for working with unistroke-gestures:</p>
+		<ul class="bulleted-list">
+			<li class="bullet-elem">
+				A custom editor for creating and editing a unistroke-gesture patterns
+			</li>
 
-      document.querySelector("#unity-loading-bar").style.display = "block";
+			<li class="bullet-elem">
+				High performance recognized built with Unity Job System and Burst compiler
+			</li>
 
-      var script = document.createElement("script");
-      script.src = loaderUrl;
-      script.onload = () => {
-        createUnityInstance(canvas, config, (progress) => {
-          document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
-              }).then((unityInstance) => {
-                document.querySelector("#unity-loading-bar").style.display = "none";
-                document.querySelector("#unity-fullscreen-button").onclick = () => {
-                  unityInstance.SetFullscreen(1);
-                };
+			<li class="bullet-elem">
+				Easy to customize and modify
+			</li>
+		</ul>
 
-              }).catch((message) => {
-                alert(message);
-              });
-            };
+		<div class="page-gap"></div>
 
-      document.body.appendChild(script);
+		<div class="flex">
+			<div style="font-size:1.5em"><span class="icon">📘</span></div>
+			<p>
+				<strong class="block-color-blue">
+					<a href="https://drive.google.com/file/d/1Gm3mAVXQx4kvJqoqLox2cc7RdM8Y-ylv/view?usp=drive_link">
+						Documentation
+					</a>
+				</strong>
+			</p>
+		</div>
 
-    </script>
-  </body>
+		<div class="page-gap"></div>
+
+		<h3 class="block-color-orange"> <mark class="highlight-default">
+			</mark><mark class="highlight-default"><strong>Contacts</strong></mark></h3>
+
+		<div class="column-list">
+			<div style="width:20%" class="column">
+				<p class="block-color-blue"><strong><a href="https://www.youtube.com/@Locominder">YouTube</a></strong>
+				</p>
+			</div>
+			<div style="width:20%" class="column">
+				<p class="block-color-blue"><strong><a
+							href="https://www.facebook.com/people/Locominder-Apps/100092492256235">Facebook</a></strong>
+				</p>
+			</div>
+		</div>
+
+		<script>
+			// 2. This code loads the IFrame Player API code asynchronously.
+			var tag = document.createElement('script');
+
+			tag.src = "https://www.youtube.com/iframe_api";
+			var firstScriptTag = document.getElementsByTagName('script')[0];
+			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+			// 3. This function creates an <iframe> (and YouTube player)
+			//    after the API code downloads.
+			var player;
+			function onYouTubeIframeAPIReady() {
+				player = new YT.Player('player', {
+					height: '360',
+					width: '640',
+					videoId: 'mOLiCwa25qA',
+					events: {
+						'onReady': onPlayerReady,
+						'onStateChange': onPlayerStateChange
+					}
+				});
+			}
+
+			// 4. The API will call this function when the video player is ready.
+			function onPlayerReady(event) {
+				event.target.playVideo();
+			}
+
+			// 5. The API calls this function when the player's state changes.
+			//    The function indicates that when playing a video (state=1),
+			//    the player should play for six seconds and then stop.
+			var done = false;
+			function onPlayerStateChange(event) {
+				if (event.data == YT.PlayerState.PLAYING && !done) {
+					setTimeout(stopVideo, 6000);
+					done = true;
+				}
+			}
+			function stopVideo() {
+				player.stopVideo();
+			}
+		</script>
+</body>
+
 </html>
