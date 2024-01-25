@@ -2,7 +2,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Simple Portfolio Website Template</title>
+	<title>Unistroke Gesture Recognition - Game Example</title>
 	<link rel="stylesheet" href="styles/core.css">
 	<link rel="stylesheet" href="styles/unity-player-style/style.css">
 	<link rel="icon" type="image/x-icon" href="images/favicon.ico">
@@ -79,7 +79,68 @@
 		<li><b>Q</b> - Exit Gesture Input Mode</li>
 	</ul>
 
-	<p>Available Spells:</p>
+	<p><b>Available Spells:</b></p>
+
+	<div class="grid" style="row-gap: 10ch; grid-template-columns: repeat(2, 1fr);">
+		<div class="flex-column">
+			<div><b>Fire Ball</b></div>
+			<div>Pattern sequence:</div>
+			<div class="flex">
+				<img style="width:150px" src="images/game-patterns/down-swipe.png">
+				<img style="width:150px" src="images/game-patterns/left-to-right.png">
+			</div>
+			<div class="text-center">
+				<i>
+					Press LMB to launch a projectile of fire.
+				</i>
+			</div>
+		</div>
+
+		<div class="flex-column">
+			<div><b>Telekinesis</b></div>
+			<div>Pattern sequence:</div>
+			<div class="flex">
+				<img style="width:150px" src="images/game-patterns/up-swipe.png">
+				<img style="width:150px" src="images/game-patterns/u-letter.png">
+				<img style="width:150px" src="images/game-patterns/n-letter.png">
+			</div>
+			<div class="text-center">
+				<i>
+					Aim at an object and hold LMB to make it follow your gaze. Use the Mouse Wheel to make object closer
+					or further away.
+				</i>
+			</div>
+		</div>
+
+		<div class="flex-column">
+			<div><b>Levitation</b></div>
+			<div>Pattern sequence:</div>
+			<div class="flex">
+				<img style="width:150px" src="images/game-patterns/right-to-left.png">
+				<img style="width:150px" src="images/game-patterns/v-letter.png">
+			</div>
+			<div class="text-center">
+				<i>
+					Upon casting, make the character float in the air.
+				</i>
+			</div>
+		</div>
+
+		<div class="flex-column">
+			<div><b>Jump Boost</b></div>
+			<div>Pattern sequence:</div>
+			<div class="flex">
+				<img style="width:150px" src="images/game-patterns/up-swipe.png">
+				<img style="width:150px" src="images/game-patterns/up-swipe.png">
+				<img style="width:150px" src="images/game-patterns/up-swipe.png">
+			</div>
+			<div class="text-center">
+				<i>
+					Boosts your next jump, making it higher.
+				</i>
+			</div>
+		</div>
+	</div>
 
 	<script>
 		var canvas = document.querySelector("#unity-canvas");
